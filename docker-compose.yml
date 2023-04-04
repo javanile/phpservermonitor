@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  phpservermonitor:
+    build: .
+    ports:
+      - 58085:80
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+
+  mysql:
+    image: mysql:5.6
+    environment:
+      - MYSQL_DATABASE=phpservermonitor
+      - MYSQL_ROOT_PASSWORD=secret

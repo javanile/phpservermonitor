@@ -2,6 +2,7 @@
 
 namespace {
 
+    use psm\Router;
     use Ifsnop\Mysqldump as IMysqldump;
 
     require_once __DIR__ . '/../src/bootstrap.php';
@@ -33,13 +34,15 @@ namespace {
     $zip->addFile($sql_file, $file.'.sql');
     $zip->close();
 
+    $user = $router->getService('user')->getUser(1);
+
     $mail = psm_build_mail();
     $mail->Subject = 'Backup';
     $mail->Priority = 1;
     $body = 'Backup';
     $mail->Body = $body;
     $mail->AltBody = $body;
-    $mail->AddAddress('info.francescobianco@gmail.com', 'Francesco Bianco');
+    $mail->AddAddress($user->email, $user->name);
     $mail->AddAttachment($zip_file);
     $mail->Send();
     $mail->ClearAddresses();

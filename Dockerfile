@@ -2,9 +2,10 @@ FROM phpservermonitor/phpservermon
 
 RUN apt-get update && \
     apt-get install -y libzip-dev && \
-    docker-php-ext-install zip && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install zip
 
 RUN rm /usr/local/bin/maria-wait.sh
 

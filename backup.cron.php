@@ -11,7 +11,9 @@ namespace {
         return;
     }
 
-    if (time() - psm_get_conf('last_backup_sent') < 604800) {
+    $backupInfo = json_decode(psm_get_conf('backup_info'), true) ?: [];
+
+    if (isset($backupInfo['next']) && $backupInfo['next'] < time()) {
         return;
     }
 
@@ -44,8 +46,8 @@ namespace {
     $mail->AltBody = $body;
     $mail->AddAddress($user->email, $user->name);
     $mail->AddAttachment($zip_file);
-    $mail->Send();
+    $backupInfo["sent"] = $mail->Send();
     $mail->ClearAddresses();
 
-    psm_update_conf('last_backup_sent', time());
+    psm_update_conf('backup_info', json_encode($backupInfo));
 }

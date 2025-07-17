@@ -8,7 +8,7 @@ stop:
 
 build:
 	@chmod u+x database-check.php
-	@docker-compose build phpservermonitor
+	@docker-compose build app
 
 shell:
 	@docker compose exec app bash
@@ -32,8 +32,9 @@ test-log: build
 test-cron:
 	@docker-compose exec phpservermonitor php cron/status.cron.php
 
-test-backup: build
-	@docker-compose run --rm phpservermonitor php cron/backup.cron.php
+test-backup:
+	@docker compose up -d --build --force-recreate app
+	@docker-compose exec app php cron/backup.cron.php
 
 test-install:
 	@docker compose down -v

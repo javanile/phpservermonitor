@@ -1,9 +1,9 @@
 FROM phpservermonitor/phpservermon
 
-RUN apt-get update && \
-    apt-get install -y libzip-dev && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y libzip-dev
+RUN apt-get clean -y
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install zip
 

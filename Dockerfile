@@ -7,8 +7,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     rm /usr/local/bin/maria-wait.sh && \
     sed 's#/usr/local/bin/maria-wait.sh#/usr/local/bin/database-check.php#g' -i /usr/local/bin/docker-entrypoint.sh && \
-    sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cron/status.cron.php && \
-    composer require ifsnop/mysqldump-php --prefer-dist
+    sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cron/status.cron.php
+
+RUN composer require ifsnop/mysqldump-php --prefer-dist
 
 COPY database-check.php /usr/local/bin/
 COPY backup.cron.php /var/www/html/cron/

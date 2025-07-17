@@ -9,7 +9,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql:8.0.35
+    image: yobasystems/alpine-mariadb
     environment:
       - MYSQL_DATABASE=phpservermonitor
       - MYSQL_ROOT_PASSWORD=secret

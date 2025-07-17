@@ -1,10 +1,17 @@
 
+start:
+	@docker compose up -d --build --remove-orphans --force-recreate
+	@echo "Visit: http://localhost:58085"
+
 stop:
 	@docker compose stop
 
 build:
 	@chmod u+x database-check.php
 	@docker-compose build phpservermonitor
+
+shell:
+	@docker compose exec app bash
 
 push:
 	@git add .

@@ -95,6 +95,7 @@ RUN composer require ifsnop/mysqldump-php --prefer-dist
 
 COPY database-check.php /usr/local/bin/
 COPY backup.cron.php /var/www/html/cron/
+COPY status.php /var/www/html/
 
 ENV MYSQL_USER root
 ENV MYSQL_HOST mysql

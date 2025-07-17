@@ -4,7 +4,7 @@ services:
   phpservermonitor:
     build: .
     ports:
-      - 58085:80
+      - "58085:80"
     environment:
       - MYSQL_ROOT_PASSWORD=secret
     links:
@@ -15,13 +15,3 @@ services:
     environment:
       - MYSQL_DATABASE=phpservermonitor
       - MYSQL_ROOT_PASSWORD=secret
-
-  adminer:
-    image: javanile/adminer
-    environment:
-      - MYSQL_DATABASE=phpservermonitor
-      - MYSQL_ROOT_PASSWORD=secret
-    ports:
-      - 58086:8080
-    links:
-      - mysql

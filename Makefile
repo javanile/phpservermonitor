@@ -6,6 +6,13 @@ build:
 	@chmod u+x database-check.php
 	@docker-compose build phpservermonitor
 
+push:
+	@git add .
+	@git commit -am "Update" || true
+	@git push
+
+fix:
+	@chmod +x deploy.sh
 
 test:
 	@docker-compose up -d --force-recreate

@@ -19,6 +19,6 @@ _sudo() {
 
 [ ! -d "/opt/phpservermonitor" ] && _sudo git clone --branch main --single-branch https://github.com/javanile/phpservermonitor /opt/phpservermonitor
 cd /opt/phpservermonitor
-_sudo git pull
+_sudo git pull --no-rebase
 _sudo docker compose up -d
 EOF

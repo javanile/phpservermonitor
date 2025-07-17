@@ -5,9 +5,10 @@ RUN apt-get update && \
     docker-php-ext-install zip && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* && \
-    rm /usr/local/bin/maria-wait.sh && \
-    sed 's#/usr/local/bin/maria-wait.sh#/usr/local/bin/database-check.php#g' -i /usr/local/bin/docker-entrypoint.sh && \
-    sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cron/status.cron.php
+    rm /usr/local/bin/maria-wait.sh
+
+RUN sed 's#/usr/local/bin/maria-wait.sh#/usr/local/bin/database-check.php#g' -i /usr/local/bin/docker-entrypoint.sh
+RUN sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cron/status.cron.php
 
 RUN composer require ifsnop/mysqldump-php --prefer-dist
 

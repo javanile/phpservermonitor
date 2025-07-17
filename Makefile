@@ -34,3 +34,8 @@ test-cron:
 
 test-backup: build
 	@docker-compose run --rm phpservermonitor php cron/backup.cron.php
+
+test-install:
+	@docker compose down -v
+	@docker compose up -d --build --remove-orphans --force-recreate
+	@echo "Visit: http://localhost:58085"

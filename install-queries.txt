@@ -1,0 +1,14 @@
+
+/*
+  $queries[] = "INSERT INTO `" . PSM_DB_PREFIX . "servers` (
+            `ip`, `port`, `label`, `type`, `pattern`, `pattern_online`, `redirect_check`,
+            `status`, `rtime`, `active`, `email`, `sms`, `pushover`,`webhook`, `telegram`, `jabber`)
+            VALUES ('http://sourceforge.net/index1.php', 80, 'SourceForge 2', 'website', '',
+                'yes', 'bad', 'on', '0.0000000', 'yes', 'yes', 'yes', 'yes','yes', 'yes', 'yes'),
+                ('smtp1.gmail.com', 465, 'Gmail SMTP 2', 'service', '',
+                'yes', 'bad','on', '0.0000000', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes')";
+
+
+*/
+
+  $queries[] = "DELETE FROM `" . PSM_DB_PREFIX . "servers`";

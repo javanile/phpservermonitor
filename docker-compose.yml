@@ -3,12 +3,8 @@ services:
     build: .
     ports:
       - "58085:80"
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - PSM_ADMIN_USER=admin
-      - PSM_ADMIN_PASSWORD=admin
-      - PSM_ADMIN_EMAIL=admin@admin.com
-      - PSM_BACKUP_SCHEDULE="* * * * *"
+    env_file:
+      - .env
     links:
       - mysql
     restart: always
@@ -17,5 +13,5 @@ services:
     image: yobasystems/alpine-mariadb
     environment:
       - MYSQL_DATABASE=phpservermonitor
-      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     restart: always

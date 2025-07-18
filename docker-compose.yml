@@ -8,14 +8,17 @@ services:
       - PSM_ADMIN_USER=admin
       - PSM_ADMIN_PASSWORD=admin
       - PSM_ADMIN_EMAIL=admin@admin.com
+      - PSM_BACKUP_SCHEDULE="* * * * *"
     links:
       - mysql
+    restart: always
 
   mysql:
     image: yobasystems/alpine-mariadb
     environment:
       - MYSQL_DATABASE=phpservermonitor
       - MYSQL_ROOT_PASSWORD=secret
+    restart: always
 
   adminer:
     image: adminer

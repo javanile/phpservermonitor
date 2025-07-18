@@ -92,6 +92,7 @@ RUN sed 's#/usr/local/bin/maria-wait.sh#/usr/local/bin/database-check.php#g' -i 
 RUN sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cron/status.cron.php
 
 RUN composer require ifsnop/mysqldump-php --prefer-dist
+RUN composer require dragonmantank/cron-expression --prefer-dist
 
 COPY database-check.php /usr/local/bin/
 COPY backup.cron.php /var/www/html/cron/
@@ -106,7 +107,6 @@ RUN sed -i '190r /var/www/html/patch/install-queries.txt' /var/www/html/src/psm/
 RUN sed -i '9r /var/www/html/patch/install-admin-user-form.txt' /var/www/html/src/templates/default/module/install/config_new_user.tpl.html
 # docker compose exec app cat /var/www/html/src/psm/Module/Install/Controller/InstallController.php > debug.php
 RUN sed -i '262r /var/www/html/patch/install-admin-user-env.txt' /var/www/html/src/psm/Module/Install/Controller/InstallController.php
-
 
 ENV MYSQL_USER root
 ENV MYSQL_HOST mysql

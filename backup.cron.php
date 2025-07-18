@@ -4,6 +4,7 @@ namespace {
 
     use psm\Router;
     use Ifsnop\Mysqldump as IMysqldump;
+	use Cron\CronExpression;
 
     require_once __DIR__ . '/../src/bootstrap.php';
 
@@ -13,6 +14,8 @@ namespace {
 
     $backupInfo = json_decode(psm_get_conf('backup_info'), true) ?: [];
 
+	var_dump($backupInfo);
+
     if (isset($backupInfo['next']) && $backupInfo['next'] < time()) {
         return;
     }
@@ -20,6 +23,7 @@ namespace {
     $dsn = 'mysql:host='.PSM_DB_HOST.';dbname='.PSM_DB_NAME;
     $file = 'dump';
     $sql_file = '/tmp/'.$file.'.sql';
+    $backupInfo['sql_size'] = filesize($sql_file) ?: 0;
 
     try {
         $dump = new IMysqldump\Mysqldump($dsn, PSM_DB_USER, PSM_DB_PASS);
@@ -48,6 +52,11 @@ namespace {
     $mail->AddAttachment($zip_file);
     $backupInfo["sent"] = $mail->Send();
     $mail->ClearAddresses();
+
+	$backupSchedule = getenv('PSM_BACKUP_SCHEDULE') ?: '0 0 * * *';
+	$backupCron = CronExpression::factory($backupSchedule);
+	$backupNextRun = $cron->getNextRunDate()->getTimestamp();
+	$backupInfo['next'] = $backupNextRun;
 
     psm_update_conf('backup_info', json_encode($backupInfo));
 }

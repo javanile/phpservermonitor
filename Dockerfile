@@ -73,7 +73,6 @@ RUN composer install --no-dev -o
 
 # Add Entrypoint & Start Commands
 COPY docker-entrypoint.sh /usr/local/bin/
-COPY maria-wait.sh /usr/local/bin/
 
 RUN chmod u+rwx /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
@@ -86,7 +85,6 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install zip
 
-RUN rm /usr/local/bin/maria-wait.sh
 
 RUN sed 's#/usr/local/bin/maria-wait.sh#/usr/local/bin/database-check.php#g' -i /usr/local/bin/docker-entrypoint.sh
 RUN sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cron/status.cron.php
@@ -94,9 +92,9 @@ RUN sed '$ i\    require_once __DIR__ . "/backup.cron.php";' -i /var/www/html/cr
 RUN composer require ifsnop/mysqldump-php --prefer-dist
 RUN composer require dragonmantank/cron-expression --prefer-dist
 
-COPY database-check.php /usr/local/bin/
-COPY backup.cron.php /var/www/html/cron/
-COPY status.php /var/www/html/
+COPY patch/database-check.php /usr/local/bin/
+COPY patch/backup.cron.php /var/www/html/cron/
+COPY patch/status.php /var/www/html/
 COPY patch/install-queries.txt /var/www/html/patch/
 COPY patch/install-admin-user-form.txt /var/www/html/patch/
 COPY patch/install-admin-user-env.txt /var/www/html/patch/

@@ -2,10 +2,10 @@ $queries[] = "DELETE FROM `" . PSM_DB_PREFIX . "servers`";
 
 $queries[] = "
 	INSERT INTO `" . PSM_DB_PREFIX . "servers` (
-		`ip`, `port`, `label`, `type`, `pattern`, `pattern_online`, `redirect_check`,
+		`ip`, `port`, `request_method`, `label`, `type`, `pattern`, `pattern_online`, `redirect_check`,
 		`status`, `rtime`, `active`, `email`, `sms`, `pushover`, `telegram`, `jabber`
 	) VALUES (
-		'http://0.0.0.0/status.php', 80, 'Server Monitor', 'website', '',
+		'http://0.0.0.0/status.php', 80, 'GET', 'Server Monitor', 'website', 'OK!',
 		'yes', 'bad', 'on', '0.0000000', 'yes', 'yes', 'yes','yes', 'yes', 'yes'
 	)
 ";

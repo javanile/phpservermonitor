@@ -4,5 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('password').value = '__PSM_ADMIN_PASSWORD__';
   document.getElementById('password_repeat').value = '__PSM_ADMIN_PASSWORD__';
   document.getElementById('email').value = '__PSM_ADMIN_EMAIL__@javanile.org';
+  document.getElementById('psm_config').submit();
 });
 </script>

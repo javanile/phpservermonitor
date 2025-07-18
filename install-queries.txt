@@ -1,27 +1,11 @@
+$queries[] = "DELETE FROM `" . PSM_DB_PREFIX . "servers`";
 
-/*
-  $queries[] = "INSERT INTO `" . PSM_DB_PREFIX . "servers` (
-            `ip`, `port`, `label`, `type`, `pattern`, `pattern_online`, `redirect_check`,
-            `status`, `rtime`, `active`, `email`, `sms`, `pushover`,`webhook`, `telegram`, `jabber`)
-            VALUES ('http://sourceforge.net/index1.php', 80, 'SourceForge 2', 'website', '',
-                'yes', 'bad', 'on', '0.0000000', 'yes', 'yes', 'yes', 'yes','yes', 'yes', 'yes'),
-                ('smtp1.gmail.com', 465, 'Gmail SMTP 2', 'service', '',
-                'yes', 'bad','on', '0.0000000', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes')";
-
-
-*/
-//error_reporting(E_ALL);
-
-$queries[] = "INSERT INTO `" . PSM_DB_PREFIX . "servers` (
-            `ip`, `port`, `label`, `type`, `pattern`, `pattern_online`, `redirect_check`,
-            `status`, `rtime`, `active`, `email`, `sms`, `pushover`, `telegram`, `jabber`)
-            VALUES ('http://sourceforge.net/index1.php', 80, 'SourceForge 2', 'website', '',
-                'yes', 'bad', 'on', '0.0000000', 'yes', 'yes', 'yes','yes', 'yes', 'yes'),
-                ('smtp1.gmail.com', 465, 'Gmail SMTP 2', 'service', '',
-                'yes', 'bad','on', '0.0000000', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes')";
-
-//echo $query;
-//$result = $this->db->exec($query);
-//die();
-
-
+$queries[] = "
+	INSERT INTO `" . PSM_DB_PREFIX . "servers` (
+		`ip`, `port`, `label`, `type`, `pattern`, `pattern_online`, `redirect_check`,
+		`status`, `rtime`, `active`, `email`, `sms`, `pushover`, `telegram`, `jabber`
+	) VALUES (
+		'http://0.0.0.0/status.php', 80, 'Server Monitor', 'website', '',
+		'yes', 'bad', 'on', '0.0000000', 'yes', 'yes', 'yes','yes', 'yes', 'yes'
+	)
+";

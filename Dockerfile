@@ -97,7 +97,10 @@ COPY database-check.php /usr/local/bin/
 COPY backup.cron.php /var/www/html/cron/
 COPY status.php /var/www/html/
 COPY install-queries.txt /var/www/html/
-RUN sed -i '134r /var/www/html/install-queries.txt' /var/www/html/src/psm/Util/Install/Installer.php
+
+# docker compose exec app cat /var/www/html/src/psm/Util/Install/Installer.php > debug.php
+RUN sed -i '190r /var/www/html/install-queries.txt' /var/www/html/src/psm/Util/Install/Installer.php
+
 
 ENV MYSQL_USER root
 ENV MYSQL_HOST mysql

@@ -5,6 +5,9 @@ services:
       - "58085:80"
     environment:
       - MYSQL_ROOT_PASSWORD=secret
+      - PSM_ADMIN_USER=admin
+      - PSM_ADMIN_PASSWORD=admin
+      - PSM_ADMIN_EMAIL=admin@admin.com
     links:
       - mysql
 
@@ -14,7 +17,7 @@ services:
       - MYSQL_DATABASE=phpservermonitor
       - MYSQL_ROOT_PASSWORD=secret
 
-  #adminer:
-  #  image: adminer
-  #  ports:
-  #    - "8080:8080"
+  adminer:
+    image: adminer
+    ports:
+      - "58086:8080"

@@ -15,3 +15,11 @@ services:
       - MYSQL_DATABASE=phpservermonitor
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     restart: always
+
+  proxy:
+    image: caddy:2.9.1-alpine
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./web:/web
+    ports:
+      - '50005:80'

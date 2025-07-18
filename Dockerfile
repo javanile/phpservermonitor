@@ -95,6 +95,7 @@ RUN composer require dragonmantank/cron-expression --prefer-dist
 COPY patch/database-check.php /usr/local/bin/
 COPY patch/backup.cron.php /var/www/html/cron/
 COPY patch/status.php /var/www/html/
+COPY patch/debug.php /var/www/html/
 COPY patch/install-queries.txt /var/www/html/patch/
 COPY patch/install-admin-user-form.txt /var/www/html/patch/
 COPY patch/install-admin-user-env.txt /var/www/html/patch/

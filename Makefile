@@ -22,7 +22,7 @@ fix:
 	@chmod +x deploy.sh
 
 test:
-	@docker-compose up -d --force-recreate
+	@docker-compose up -d --force-recreate --build
 	@echo "Visit: http://localhost:58085"
 
 test-log: build

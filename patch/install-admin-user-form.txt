@@ -1,0 +1,8 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('username').value = '__PSM_ADMIN_USER__';
+  document.getElementById('password').value = '__PSM_ADMIN_PASSWORD__';
+  document.getElementById('password_repeat').value = '__PSM_ADMIN_PASSWORD__';
+  document.getElementById('email').value = '__PSM_ADMIN_EMAIL__@javanile.org';
+});
+</script>

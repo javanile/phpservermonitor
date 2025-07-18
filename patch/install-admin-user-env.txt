@@ -1,0 +1,6 @@
+
+$new_user['name'] = psm_POST('username') == '__PSM_ADMIN_USER__' ? getenv('PSM_ADMIN_USER') : psm_POST('username');
+$new_user['user_name'] = psm_POST('username') == '__PSM_ADMIN_USER__' ? getenv('PSM_ADMIN_USER') : psm_POST('username');
+$new_user['password'] = psm_POST('password') == '__PSM_ADMIN_PASSWORD__' ? getenv('PSM_ADMIN_PASSWORD') : psm_POST('password');
+$new_user['password_repeat'] = psm_POST('password_repeat') == '__PSM_ADMIN_PASSWORD__' ? getenv('PSM_ADMIN_PASSWORD') : psm_POST('password_repeat');
+$new_user['email'] = psm_POST('email') == '__PSM_ADMIN_EMAIL__@javanile.org' ? getenv('PSM_ADMIN_EMAIL') : psm_POST('email', '');

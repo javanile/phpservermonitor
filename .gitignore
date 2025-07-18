@@ -1,3 +1,5 @@
 .idea/
 .vscode/
 .env
+/debug.html
+/debug.php

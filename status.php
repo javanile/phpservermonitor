@@ -2,8 +2,15 @@
 
 require __DIR__ . '/src/bootstrap.php';
 
-if (!psm_get_conf('email_smtp')) {
-    die("No STMP settings");
+function error($message) {
+	http_response_code(500);
+	echo "$message\n";
+	exit;
+
 }
 
-echo "OK";
+if (!psm_get_conf('email_smtp')) {
+    error("No STMP settings");
+}
+
+echo "OK!\n";

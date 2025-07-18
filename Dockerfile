@@ -96,12 +96,22 @@ RUN composer require ifsnop/mysqldump-php --prefer-dist
 COPY database-check.php /usr/local/bin/
 COPY backup.cron.php /var/www/html/cron/
 COPY status.php /var/www/html/
-COPY install-queries.txt /var/www/html/
+COPY patch/install-queries.txt /var/www/html/patch/
+COPY patch/install-admin-user-form.txt /var/www/html/patch/
+COPY patch/install-admin-user-env.txt /var/www/html/patch/
 
 # docker compose exec app cat /var/www/html/src/psm/Util/Install/Installer.php > debug.php
-RUN sed -i '190r /var/www/html/install-queries.txt' /var/www/html/src/psm/Util/Install/Installer.php
+RUN sed -i '190r /var/www/html/patch/install-queries.txt' /var/www/html/src/psm/Util/Install/Installer.php
+# docker compose exec app cat /var/www/html/src/templates/default/module/install/config_new_user.tpl.html > debug.html
+RUN sed -i '9r /var/www/html/patch/install-admin-user-form.txt' /var/www/html/src/templates/default/module/install/config_new_user.tpl.html
+# docker compose exec app cat /var/www/html/src/psm/Module/Install/Controller/InstallController.php > debug.php
+RUN sed -i '262r /var/www/html/patch/install-admin-user-env.txt' /var/www/html/src/psm/Module/Install/Controller/InstallController.php
 
 
 ENV MYSQL_USER root
 ENV MYSQL_HOST mysql
 ENV MYSQL_PASSWORD secret
+
+ENV PSM_ADMIN_USER admin
+ENV PSM_ADMIN_PASSWORD admin
+ENV PSM_ADMIN_EMAIL admin@admin.com

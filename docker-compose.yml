@@ -17,7 +17,7 @@ services:
       - MYSQL_DATABASE=phpservermonitor
       - MYSQL_ROOT_PASSWORD=secret
 
-  adminer:
-    image: adminer
-    ports:
-      - "58086:8080"
+  #adminer:
+  #  image: adminer
+  #  ports:
+  #    - "58086:8080"

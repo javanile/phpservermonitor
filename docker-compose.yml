@@ -1,6 +1,18 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION}
+        PSM_REFRESH_RATE_SECONDS: ${PSM_REFRESH_RATE_SECONDS}
+        PSM_AUTO_CONFIGURE: ${PSM_AUTO_CONFIGURE}
+        PSM_PHP_DEBUG: ${PSM_PHP_DEBUG}
+        MYSQL_HOST: ${MYSQL_HOST}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_DATABASE_PREFIX: ${MYSQL_DATABASE_PREFIX}
+        PHP_TIME_ZONE: ${PHP_TIME_ZONE}
     ports:
       - "58085:80"
     env_file:
@@ -11,9 +23,8 @@ services:
 
   mysql:
     image: yobasystems/alpine-mariadb
-    environment:
-      - MYSQL_DATABASE=phpservermonitor
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    env_file:
+      - .env
     restart: always
 
   proxy:

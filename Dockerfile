@@ -2,7 +2,7 @@ FROM php:7.4-apache
 # MAINTAINER Austin St. Aubin <austinsaintaubin@gmail.com>
 
 # Build Environment Variables
-ENV VERSION 3.5.2
+ARG VERSION
 ENV URL https://github.com/phpservermon/phpservermon/archive/v${VERSION}.tar.gz
 
 # Install Base
@@ -27,17 +27,17 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # User Environment Variables
-ENV PSM_REFRESH_RATE_SECONDS 90
-ENV PSM_AUTO_CONFIGURE true
-ENV PSM_PHP_DEBUG false
-ENV MYSQL_HOST database
-ENV MYSQL_USER phpservermonitor
-ENV MYSQL_PASSWORD YOUR_PASSWORD
-ENV MYSQL_DATABASE phpservermonitor
-ENV MYSQL_DATABASE_PREFIX psm_
+ARG PSM_REFRESH_RATE_SECONDS
+ARG PSM_AUTO_CONFIGURE
+ARG PSM_PHP_DEBUG
+ARG MYSQL_HOST
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_DATABASE
+ARG MYSQL_DATABASE_PREFIX
 
 # Time Zone
-ENV PHP_TIME_ZONE 'Europe/Amsterdam'
+ARG PHP_TIME_ZONE
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN sed -i 's/;date.timezone =/date.timezone = "${PHP_TIME_ZONE}"/g' "$PHP_INI_DIR/php.ini"
 # RUN php -i | grep -i error
@@ -106,11 +106,3 @@ RUN sed -i '190r /var/www/html/patch/install-queries.txt' /var/www/html/src/psm/
 RUN sed -i '9r /var/www/html/patch/install-admin-user-form.txt' /var/www/html/src/templates/default/module/install/config_new_user.tpl.html
 # docker compose exec app cat /var/www/html/src/psm/Module/Install/Controller/InstallController.php > debug.php
 RUN sed -i '262r /var/www/html/patch/install-admin-user-env.txt' /var/www/html/src/psm/Module/Install/Controller/InstallController.php
-
-ENV MYSQL_USER root
-ENV MYSQL_HOST mysql
-ENV MYSQL_PASSWORD secret
-
-ENV PSM_ADMIN_USER admin
-ENV PSM_ADMIN_PASSWORD admin
-ENV PSM_ADMIN_EMAIL admin@admin.com
